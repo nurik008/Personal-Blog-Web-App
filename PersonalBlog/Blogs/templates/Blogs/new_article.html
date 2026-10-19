@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% if form.instance.pk %}Edit article{% else %}New article{% endif %}</title>
+</head>
+<body>
+  <h1>{% if form.instance.pk %}Edit article{% else %}New article{% endif %}</h1>
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+      <p>
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label><br>
+        {{ field }}
+        {{ field.errors }}
+      </p>
+    {% endfor %}
+
+    <button type="submit">Save article</button>
+    <a href="{% url 'admin_page' %}">Cancel</a>
+  </form>
+</body>
+</html>

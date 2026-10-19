@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Admin login</title>
+</head>
+<body>
+  <h1>Admin login</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit">Log in</button>
+  </form>
+
+  <p><a href="{% url 'home' %}">Back to articles</a></p>
+
+  <p>Don't have an account? <a href="{% url 'register' %}">Sign up</a></p>
+</body>
+</html>

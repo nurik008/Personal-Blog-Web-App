@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ article.title }}</title>
+</head>
+<body>
+  <article>
+    <h1>{{ article.title }}</h1>
+    <p>Published: {{ article.published_at|date:"F j, Y" }}</p>
+
+    <div>{{ article.content|linebreaks }}</div>
+  </article>
+
+  <p><a href="{% url 'home' %}">Back to all articles</a></p>
+</body>
+</html>
