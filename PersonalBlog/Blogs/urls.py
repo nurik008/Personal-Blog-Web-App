@@ -12,5 +12,11 @@ urlpatterns = [
     
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('register/', views.RegisterView.as_view(), name='register')
+    path('register/', views.RegisterView.as_view(), name='register'),
+    
+    path('api/articles/', views.HomeApiView.as_view(), name='api_articles'),
+    path('api/articles/<int:id>/', views.ArticleDetailApiView.as_view(), name='api_article_detail'),
+    path('api/articles/create/', views.ArticleCreateApiView.as_view(), name='api_article_create'),
+    path('api/articles/<int:id>/update/', views.ArticleUpdateApiView.as_view(), name='api_article_update'),
+    path('api/articles/<int:id>/delete/', views.ArticleDeleteApiView.as_view(), name='api_article_delete'),
 ]

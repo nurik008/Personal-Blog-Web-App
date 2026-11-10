@@ -5,9 +5,11 @@ from django.views import View
 from django.views.decorators.http import require_POST
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, FormView, ListView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from .models import Article
 from .forms import ArticleForm
+from rest_framework import generics
+from .serializers import ArticleSerializer
 
 
 # ========= Guest functions =========
@@ -51,3 +53,29 @@ class RegisterView(CreateView):
     form_class = UserCreationForm
     template_name = 'registration/register.html'
     success_url = reverse_lazy('login')
+    
+# ===== API CRUD operations =========
+#Create
+class ArticleCreateApiView(generics.CreateAPIView):
+    serializer_class = ArticleSerializer
+
+#Read
+class HomeApiView(generics.ListAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+class ArticleDetailApiView(generics.RetrieveAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    lookup_url_kwarg = 'id'
+
+#Update
+class ArticleUpdateApiView(generics.UpdateAPIView):
+    queryset = Article.objects.all() 
+    serializer_class = ArticleSerializer
+    lookup_url_kwarg = 'id'
+
+#Delete
+class ArticleDeleteApiView(generics.DestroyAPIView):
+    queryset = Article.objects.all() 
+    serializer_class = ArticleSerializer
+    lookup_url_kwarg = 'id'
